@@ -2,18 +2,21 @@ package com.voze.mtolman
 
 import java.util.PriorityQueue
 
-public class Dictionary(private val words: List<String>) {
-    public fun nearest(word: String, top: Int = 10) : List<WordResult> {
-        val results = PriorityQueue<WordResult>(top, Comparator { l, r -> -l.distance.compareTo(r.distance) })
-        words.forEach {
-            val dist = distance(word, it)
-            results.add(WordResult(word, dist))
-            if (results.size > 10) {
+class Dictionary(private val words: List<String>) {
+    fun nearest(word: String, top: Int = 10) : List<WordResult> {
+        val results = PriorityQueue<WordResult>(top) { l, r -> -l.distance.compareTo(r.distance) }
+        for (dictWord in words) {
+            val dist = distance(word, dictWord)
+            if (dist == 0) {
+                return listOf(WordResult(dictWord, 0))
+            }
+            results.add(WordResult(dictWord, dist))
+            if (results.size > top) {
                 assert(results.peek().distance >= dist)
                 results.remove()
             }
         }
-        assert(results.size <= 10)
+        assert(results.size <= top)
         return results.reversed().toList()
     }
 

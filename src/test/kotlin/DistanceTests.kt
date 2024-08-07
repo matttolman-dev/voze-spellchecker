@@ -18,4 +18,12 @@ class DistanceTests {
         assertEquals(3, Dictionary.distance("cross", "drove"))
         assertEquals(4, Dictionary.distance("mix", "boxer"))
     }
+
+    @Test
+    fun edgeCases() {
+        assertEquals(0, Dictionary.distance("", ""))
+        assertEquals(3, Dictionary.distance("", "abc"))
+        assertEquals(3, Dictionary.distance("abc", ""))
+        assertEquals(0, Dictionary.distance("abc", "abc"))
+    }
 }
