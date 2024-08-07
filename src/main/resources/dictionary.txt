@@ -104353,7 +104353,7 @@ outpush
 outpushed
 outpushes
 outpushing
-formatting
+output
 outputs
 outputted
 outputting
@@ -118562,7 +118562,7 @@ processes
 processibilities
 processibility
 processible
-text
+processing
 procession
 processional
 processionally
