@@ -1,4 +1,4 @@
-package com.voze.mtolman
+package com.voze.mtolman.Text
 
 import com.voze.mtolman.Results.WordResult
 import java.util.PriorityQueue

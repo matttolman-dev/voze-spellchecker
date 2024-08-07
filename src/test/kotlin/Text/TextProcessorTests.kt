@@ -1,5 +1,8 @@
-import com.voze.mtolman.TextDictionary
-import com.voze.mtolman.TextProcessor
+package Text
+
+import assertEqualIgnoreOrder
+import com.voze.mtolman.Text.TextDictionary
+import com.voze.mtolman.Text.TextProcessor
 import kotlin.test.Test
 import kotlin.test.assertContentEquals
 import kotlin.test.assertEquals

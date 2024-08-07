@@ -1,4 +1,6 @@
-import com.voze.mtolman.TextDictionary
+package Text
+
+import com.voze.mtolman.Text.TextDictionary
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
