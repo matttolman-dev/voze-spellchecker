@@ -1,5 +1,5 @@
 import com.voze.mtolman.Dictionary
-import com.voze.mtolman.WordResult
+import com.voze.mtolman.Results.WordResult
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
@@ -11,8 +11,8 @@ class DictionaryTests {
 
     @Test
     fun testFindExact() {
-        assertEquals(listOf(WordResult("car", 0)), testDictionary.nearest("car"))
-        assertEquals(listOf(WordResult("snail", 0)), testDictionary.nearest("snail"))
+        assertEquals(listOf(), testDictionary.misspelledNearest("car"))
+        assertEquals(listOf(), testDictionary.misspelledNearest("snail"))
     }
 
     @Test
@@ -21,7 +21,7 @@ class DictionaryTests {
             WordResult("car", 1),
             WordResult("bar", 1),
             WordResult("far", 1),
-        ), testDictionary.nearest("tar", 3))
+        ), testDictionary.misspelledNearest("tar", 3))
 
         assertEqualIgnoreOrder(listOf(
             WordResult("car", 1),
@@ -29,7 +29,7 @@ class DictionaryTests {
             WordResult("far", 1),
             WordResult("cat", 2),
             WordResult("cab", 2),
-        ), testDictionary.nearest("tar", 5))
+        ), testDictionary.misspelledNearest("tar", 5))
 
         assertEqualIgnoreOrder(listOf(
             WordResult("car", 1),
@@ -39,7 +39,7 @@ class DictionaryTests {
             WordResult("cab", 2),
             WordResult("ode", 3),
             WordResult("large", 3),
-        ), testDictionary.nearest("tar", 7))
+        ), testDictionary.misspelledNearest("tar", 7))
     }
 
     fun <T> assertEqualIgnoreOrder(expected: List<T>, actual: List<T>) {

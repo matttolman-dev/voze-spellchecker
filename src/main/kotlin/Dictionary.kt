@@ -1,14 +1,15 @@
 package com.voze.mtolman
 
+import com.voze.mtolman.Results.WordResult
 import java.util.PriorityQueue
 
 class Dictionary(private val words: List<String>) {
-    fun nearest(word: String, top: Int = 10) : List<WordResult> {
+    fun misspelledNearest(word: String, top: Int = 10) : List<WordResult> {
         val results = PriorityQueue<WordResult>(top) { l, r -> -l.distance.compareTo(r.distance) }
         for (dictWord in words) {
             val dist = distance(word, dictWord)
             if (dist == 0) {
-                return listOf(WordResult(dictWord, 0))
+                return listOf()
             }
             results.add(WordResult(dictWord, dist))
             if (results.size > top) {
