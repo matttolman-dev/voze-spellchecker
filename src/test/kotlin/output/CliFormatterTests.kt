@@ -1,8 +1,8 @@
-package Formatting
+package output
 
-import com.voze.mtolman.Formatting.CliFormatter
-import com.voze.mtolman.Text.Results.MisspelledTextResult
-import com.voze.mtolman.Text.Results.WordResult
+import com.voze.mtolman.output.CliFormatter
+import com.voze.mtolman.processing.results.MisspelledTextResult
+import com.voze.mtolman.processing.results.WordResult
 import kotlin.test.Test
 import kotlin.test.assertEquals
 

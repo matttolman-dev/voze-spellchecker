@@ -1,6 +1,6 @@
-package Text
+package processing
 
-import com.voze.mtolman.Text.TextDictionary
+import com.voze.mtolman.processing.TextDictionary
 import kotlin.test.Test
 import kotlin.test.assertEquals
 

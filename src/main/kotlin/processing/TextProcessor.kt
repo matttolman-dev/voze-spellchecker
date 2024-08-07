@@ -1,6 +1,6 @@
-package com.voze.mtolman.Text
+package com.voze.mtolman.processing
 
-import com.voze.mtolman.Text.Results.MisspelledTextResult
+import com.voze.mtolman.processing.results.MisspelledTextResult
 
 class TextProcessor(private val textDictionary: TextDictionary) {
     fun findMisspellings(inputText: String, maxSuggestions: Int = 10) : List<MisspelledTextResult> {

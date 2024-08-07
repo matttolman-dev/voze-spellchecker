@@ -1,7 +1,7 @@
-package com.voze.mtolman.Formatting
+package com.voze.mtolman.output
 
-import com.voze.mtolman.Text.Results.ContextResult
-import com.voze.mtolman.Text.Results.MisspelledTextResult
+import com.voze.mtolman.processing.results.ContextResult
+import com.voze.mtolman.processing.results.MisspelledTextResult
 
 class CliFormatter(private val originalText: String) {
     private val lineColTracker = LineColumnConverter(originalText)

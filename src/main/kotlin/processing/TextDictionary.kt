@@ -1,6 +1,6 @@
-package com.voze.mtolman.Text
+package com.voze.mtolman.processing
 
-import com.voze.mtolman.Text.Results.WordResult
+import com.voze.mtolman.processing.results.WordResult
 import java.util.PriorityQueue
 
 class TextDictionary(private val words: List<String>) {
