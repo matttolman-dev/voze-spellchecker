@@ -1,4 +1,4 @@
-package processing
+package com.voze.mtolman.text
 
 import com.voze.mtolman.processing.TextDictionary
 import kotlin.test.Test

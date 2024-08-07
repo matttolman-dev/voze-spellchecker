@@ -1,4 +1,4 @@
-package output
+package com.voze.mtolman.formatting
 
 import com.voze.mtolman.output.CliFormatter
 import com.voze.mtolman.processing.results.MisspelledTextResult

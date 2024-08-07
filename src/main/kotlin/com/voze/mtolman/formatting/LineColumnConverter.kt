@@ -1,6 +1,6 @@
 package com.voze.mtolman.output
 
-import com.voze.mtolman.output.results.LineColResult
+import com.voze.mtolman.com.voze.mtolman.formatting.results.LineColResult
 import java.util.TreeMap
 
 class LineColumnConverter(text: String) {

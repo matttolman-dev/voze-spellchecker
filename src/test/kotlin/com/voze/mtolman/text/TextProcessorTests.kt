@@ -1,6 +1,6 @@
-package processing
+package com.voze.mtolman.text
 
-import assertEqualIgnoreOrder
+import com.voze.mtolman.assertEqualIgnoreOrder
 import com.voze.mtolman.processing.TextDictionary
 import com.voze.mtolman.processing.TextProcessor
 import kotlin.test.Test

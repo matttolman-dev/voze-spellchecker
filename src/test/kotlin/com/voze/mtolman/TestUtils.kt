@@ -1,3 +1,5 @@
+package com.voze.mtolman
+
 import org.junit.jupiter.api.Assertions.assertEquals
 import kotlin.test.assertTrue
 
