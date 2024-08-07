@@ -2,7 +2,7 @@ package Text
 
 import assertEqualIgnoreOrder
 import com.voze.mtolman.Text.TextDictionary
-import com.voze.mtolman.Results.WordResult
+import com.voze.mtolman.Text.Results.WordResult
 import kotlin.test.Test
 import kotlin.test.assertEquals
 

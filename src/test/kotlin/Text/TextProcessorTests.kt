@@ -44,12 +44,12 @@ class TextProcessorTests {
         assertSuggestions("card", 3, "car", "cart", "cars")
     }
 
-    fun assertSuggestions(text: String, maxSuggestions: Int, vararg misspellings: String) {
-        val res = testProcessor.findMisspellings(text, maxSuggestions).flatMap { it.suggestions.map { inner -> inner.match } }
+    private fun assertSuggestions(text: String, maxSuggestions: Int, vararg misspellings: String) {
+        val res = testProcessor.findMisspellings(text, maxSuggestions).flatMap { it.suggestions.map { inner -> inner.correction } }
         assertEqualIgnoreOrder(misspellings.toList(), res)
     }
 
-    fun assertMisspelledWords(text: String, vararg misspellings: String) {
+    private fun assertMisspelledWords(text: String, vararg misspellings: String) {
         val res = testProcessor.findMisspellings(text).map { it.misspelled }
         assertContentEquals(misspellings.toList(), res)
     }
