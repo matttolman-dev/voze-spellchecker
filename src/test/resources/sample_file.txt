@@ -1,0 +1,3 @@
+This is a sample file.
+I have a fwe Spellling Errrors in this program.
+Some are prtty easy to find. Otehrs are less so.
