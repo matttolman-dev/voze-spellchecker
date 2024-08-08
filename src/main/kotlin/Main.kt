@@ -10,7 +10,7 @@ import kotlin.system.exitProcess
 fun main(args: Array<String>) {
     if (args.size != 2) {
         println("Usage:\n\texecutable <dictionary_file> <check_file>")
-        exitProcess(1)
+        exitProcess(2)
     }
 
     val dictFilePath = args[0]
@@ -20,7 +20,19 @@ fun main(args: Array<String>) {
     val processor = TextProcessor(dictionary)
     val text = TextLoader.loadFromFile(textFilePath)
     val formatter = CliFormatter(text)
-    val output = formatter.formatResults(processor.findMisspellings(text))
+    val results = processor.findMisspellings(text)
+    val output = formatter.formatResults(results)
 
     println(output)
+
+    // Set a non-zero exit code if there was a misspelling
+    // Makes it easier to check if there's a misspelling on bash (e.g. in CI/CD)
+    val exitCode = if (results.isEmpty()) {
+        0
+    }
+    else {
+        1
+    }
+
+    exitProcess(exitCode)
 }

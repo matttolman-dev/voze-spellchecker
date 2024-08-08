@@ -5,7 +5,6 @@ import com.voze.mtolman.com.voze.mtolman.text.SpellcheckDictionary
 import com.voze.mtolman.com.voze.mtolman.text.dictionaries.TrieDictionary
 import com.voze.mtolman.com.voze.mtolman.text.dictionaries.ListDictionary
 import com.voze.mtolman.com.voze.mtolman.text.TextProcessor
-import io.kotest.matchers.collections.shouldContainAll
 import io.kotest.matchers.shouldBe
 import kotlin.test.Test
 import kotlin.test.assertContentEquals
@@ -81,7 +80,7 @@ class TextProcessorTests {
 
     private fun assertSuggestions(dict: SpellcheckDictionary, text: String, maxCost: Int, vararg misspellings: String) {
         val testProcessor = TextProcessor(dict)
-        val res = testProcessor.findMisspellings(text, maxCost = maxCost)
+        val res = testProcessor.findMisspellings(text, maxDifference = maxCost)
             .flatMap { it.suggestions.map { inner -> inner.correction } }
         assertEqualIgnoreOrder(misspellings.toList(), res)
     }

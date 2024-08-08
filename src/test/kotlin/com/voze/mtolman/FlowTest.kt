@@ -11,6 +11,16 @@ import org.junit.jupiter.api.Test
 
 class FlowTest {
     @Test
+    fun testGood() {
+        val dictionary = TrieDictionary(DictionaryLoader.loadWordsFromResource("dictionary.txt"))
+        val processor = TextProcessor(dictionary)
+        val text = TextLoader.loadFromResource("good_file.txt")
+        val formatter = CliFormatter(text)
+        val output = formatter.formatResults(processor.findMisspellings(text))
+        output shouldBe "No words misspelled, great job!"
+    }
+
+    @Test
     fun testSmall() {
         val dictionary = TrieDictionary(DictionaryLoader.loadWordsFromResource("dictionary.txt"))
         val processor = TextProcessor(dictionary)

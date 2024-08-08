@@ -3,13 +3,24 @@ package com.voze.mtolman.output
 import com.voze.mtolman.processing.results.ContextResult
 import com.voze.mtolman.processing.results.MisspelledTextResult
 
+/**
+ * Handles formatting misspelling output for CLI interfaces
+ * It takes the original text since it will preprocess the line/column information for the text
+ */
 class CliFormatter(private val originalText: String) {
     private val lineColTracker = LineColumnConverter(originalText)
+
+    /** Case information used for handling Proper Nouns and ACRONYMS */
     enum class CaseType {
         UPPER, TITLE, OTHER
     }
 
-    fun formatResults(misspelled: List<MisspelledTextResult>, contextSurrounding: Int = 8) : String {
+    /**
+     * Formats results for CLI output
+     * @param misspelled The misspelled text results
+     * @param contextSurrounding The maximum before and after characters to include for the context
+     */
+    fun formatResults(misspelled: List<MisspelledTextResult>, contextSurrounding: Int = 8): String {
         if (misspelled.isEmpty()) {
             return "No words misspelled, great job!";
         }
@@ -35,16 +46,30 @@ class CliFormatter(private val originalText: String) {
                 .append('\n')
                 .append(pre)
                 .append("^".repeat(misspelling.misspelled.length))
-                .append("\n\nSuggestions:\n  ")
-                .append(misspelling.suggestions.sortedBy { it.distance }
-                    .joinToString("  ") { mirrorCase(case, it.correction) })
-                .append("\n===============\n")
+
+            if (misspelling.suggestions.isEmpty()) {
+                result.append("\n\nNo suggestions found")
+            } else {
+                result
+                    .append("\n\nSuggestions:\n  ")
+                    .append(misspelling.suggestions.sortedBy { it.distance }
+                        .joinToString("  ") { mirrorCase(case, it.correction) })
+            }
+            result.append("\n===============\n")
         }
 
         return result.toString()
     }
 
-    private fun pullContext(originalText: String, misspelling: MisspelledTextResult, contextSurrounding: Int) : ContextResult {
+    /**
+     * Pulls context from the original text for a misspelling
+     * Will drop newline characters
+     */
+    private fun pullContext(
+        originalText: String,
+        misspelling: MisspelledTextResult,
+        contextSurrounding: Int
+    ): ContextResult {
         val preIndex = 0.coerceAtLeast(misspelling.position - contextSurrounding)
         val postIndex =
             (misspelling.position + misspelling.misspelled.length + contextSurrounding).coerceAtMost(originalText.length)
@@ -66,7 +91,8 @@ class CliFormatter(private val originalText: String) {
         return ContextResult(preCount, substring)
     }
 
-    private fun detectCaseType(originalWord: String) : CaseType {
+    /** Detects casing patterns to be Title, UPPER, or other */
+    private fun detectCaseType(originalWord: String): CaseType {
         if (originalWord.isBlank()) {
             return CaseType.OTHER
         }
@@ -81,7 +107,8 @@ class CliFormatter(private val originalText: String) {
         return CaseType.OTHER
     }
 
-    private fun mirrorCase(case: CaseType, suggestedWord: String) : String {
+    /** Tries to mirror casing of another word for better Proper Noun and ACRONYM display for suggestions */
+    private fun mirrorCase(case: CaseType, suggestedWord: String): String {
         if (suggestedWord.isBlank()) {
             return suggestedWord
         }
