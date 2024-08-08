@@ -1,9 +1,10 @@
-package com.voze.mtolman.processing
+package com.voze.mtolman.com.voze.mtolman.text
 
+import com.voze.mtolman.com.voze.mtolman.text.dictionaries.ListDictionary
 import com.voze.mtolman.processing.results.MisspelledTextResult
 
-class TextProcessor(private val textDictionary: TextDictionary) {
-    fun findMisspellings(inputText: String, maxSuggestions: Int = 10) : List<MisspelledTextResult> {
+class TextProcessor(private val listDictionary: ListDictionary) {
+    fun findMisspellings(inputText: String, maxSuggestions: Int = 10, maxCost: Int = Int.MAX_VALUE) : List<MisspelledTextResult> {
         var wordStart = 0
         var inWord = false
         val results = ArrayList<MisspelledTextResult>(inputText.length / 16 + 8)
@@ -13,7 +14,7 @@ class TextProcessor(private val textDictionary: TextDictionary) {
                 if (inWord) {
                     inWord = false
                     val word = inputText.substring(wordStart, a)
-                    val spellingResults = textDictionary.misspelledNearest(word.lowercase(), maxSuggestions)
+                    val spellingResults = listDictionary.misspelledNearest(word.lowercase(), maxSuggestions, maxCost)
                     if (spellingResults.isNotEmpty()) {
                         results.add(MisspelledTextResult(word, a, spellingResults))
                     }
